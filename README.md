@@ -1,7 +1,7 @@
 # WX Safe Events
 Simple, yet functional Safe Events feature for FiveM
 
-This method was made for [WX AntiCheat](https://anticheat.0wx.space/), consider purchasing it to make your server protected even more
+This method was made for [WX AntiCheat](https://ac.wx0.dev/), consider purchasing it to make your server protected even more
 
 
 # What are Safe Events?
