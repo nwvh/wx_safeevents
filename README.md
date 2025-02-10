@@ -1,30 +1,46 @@
-# WX Safe Events
-Simple, yet functional Safe Events feature for FiveM
+# WX Safe Events (v2)
+
+Simple approach to easily securing your server events.
 
 This method was made for [WX AntiCheat](https://ac.wx0.dev/), consider purchasing it to make your server protected even more
 
+## Usage
 
-# What are Safe Events?
-**Safe Events** (*sometimes Protected Events*) are server events in FiveM, that are (as the name suggests) protected against cheaters by an additional resource, in this case by wx_safeevents. It allows normal players to trigger them without problems, but when a cheater with an executor tries to execute them, it will ban the cheater.
+1. Find the event you want to protect on the server side
+2. Add an additional first argument:
 
-# Installation
-* Find a resource you want to protect
-* Find any event(s) that you want to protect and add them to the config
-* Go to the fxmanifest.lua of the resource and edit it like so:
 ```lua
--- client_script "client.lua" -- REMOVE THIS LINE
+-- BEFORE
+RegisterNetEvent('eventName',function(arg1, arg2)
+    return "something"
+end)
 
-client_scripts {
-    "@wx_safeevents/client/client.lua", -- Make sure the safe event module is loaded first
-    "client.lua",
-    -- load any other client scripts
-}
-
--- Basically make sure the safe event module is loaded before first before other client scripts
+-- AFTER
+RegisterNetEvent('eventName',function(_, arg1, arg2)
+                                     ^^^
+    return "something"
+end)
 ```
-* Restart your server
-* Profit ???
 
-# Additional Info
+3. Register the event on the server side using the export below
+4. Replace all `TriggerServerEvent('event-you-registered')` on the client side with the export below
+5. DONE
 
-* Please note that this method won't stop 100% of your cheaters, this method is somewhat bypassable, if the cheater has some knowledge about FiveM events and isn't blindly triggering them.
+## Exports
+
+### Client
+
+```lua
+-- Trigger the event
+exports.wx_safeevents:triggerSafeEvent('eventName', ...)
+```
+
+### Server
+
+```lua
+-- Register the event
+exports.wx_safeevents:registerSafeEvent('eventName')
+
+-- Unregister the event
+exports.wx_safeevents:unregisterSafeEvent('eventName')
+```

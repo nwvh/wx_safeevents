@@ -3,9 +3,9 @@
 fx_version 'cerulean'
 game 'gta5'
 lua54 'yes'
-version '1.0.0'
+version '2.0.0'
 author 'wx / woox'
-description 'Safe Events for WX AntiCheat'
+description 'Simple FiveM Safe Events'
 
 
 -- [[ Client-Side Files ]]
@@ -17,11 +17,8 @@ client_scripts {
 -- [[ Server-Side Files ]]
 
 server_scripts {
-    'server/*.lua'
+    'server/*.lua',
+    'config/*.lua',
 }
 
--- [[ Shared Files & Configs ]]
-
-shared_scripts {
-    'configs/*.lua'
-}
+shared_script 'shared/shared.lua'
