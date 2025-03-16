@@ -1,12 +1,11 @@
 local registeredEvents = {}
 local tokens = {}
-local recivedPlayers = {}
-
+local receivedPlayers = {}
 
 function GenerateToken(eventName)
-    local timestamp = GetGameTimer()
+    local timestamp = os.time()
     math.randomseed(timestamp * math.random(10000, 999999))
-    local randomNumber = math.random(100000, 999999)
+    local randomNumber = math.random(100000, 999999) * math.pi
 
     local token = ("__wx_safeevents:%s:%d:%d"):format(eventName, timestamp, randomNumber)
     tokens[eventName] = token
@@ -40,8 +39,9 @@ function RegisterSafeEvent(eventName)
 end
 
 RegisterNetEvent('wx_safeevents:fetchData', function()
-    if recivedPlayers[source] then
+    if receivedPlayers[source] then
         wx.BanPlayer(source, "Safe Events Exploit")
+        return
     end
     TriggerClientEvent('wx_safeevents:getData', source, {
         tokens = tokens,
@@ -49,11 +49,9 @@ RegisterNetEvent('wx_safeevents:fetchData', function()
     })
 end)
 
-exports("unregisterSafeEvent", UnregisterSafeEvent)
-exports("registerSafeEvent", RegisterSafeEvent)
-
-RegisterNetEvent('safetest', function(arg1, arg2)
-    print("working", arg1, arg2)
+AddEventHandler('playerDropped', function()
+    receivedPlayers[source] = nil
 end)
 
-RegisterSafeEvent("safetest")
+exports("unregisterSafeEvent", UnregisterSafeEvent)
+exports("registerSafeEvent", RegisterSafeEvent)
