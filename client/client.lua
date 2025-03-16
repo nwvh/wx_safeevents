@@ -26,7 +26,3 @@ CreateThread(function()
 end)
 
 exports("triggerSafeEvent", TriggerSafeEvent)
-
-RegisterCommand('triggersafe', function(source, args, raw)
-    TriggerSafeEvent('safetest', "arg1", "arg2")
-end)
