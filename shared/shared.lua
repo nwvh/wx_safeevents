@@ -6,5 +6,5 @@ function BetterPrint(text, type)
         ["info"] = "^7[^5 INFO ^7] ",
         ["success"] = "^7[^2 SUCCESS ^7] ",
     }
-    return print("^7[^5 WX ANTICHEAT ^7] " .. (types[type or "info"]) .. text)
+    return print(("^7[^5 WX SAFEEVENTS ^7] %s %s"):format((types[type or "info"]), text))
 end
